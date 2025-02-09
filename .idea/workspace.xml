@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4695547e-3d7b-4919-a06b-99d68bede64f" name="Changes" comment="docs: Project structure update" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Yash-21BCS6094&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Yash-21BCS6094/Food_Delivery_Management.git&quot;,
+    &quot;accountId&quot;: &quot;dfdc698a-3d34-461e-94c6-7f55fdae42b4&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2sn2x7gYW93pZQj6cnZB2Oy34G9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Big_Oh_Java_Tasks/Food_Management/repo&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Big_Oh_Java_Tasks\Food_Management\repo\demo" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4695547e-3d7b-4919-a06b-99d68bede64f" name="Changes" comment="" />
+      <created>1739077263380</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1739077263380</updated>
+    </task>
+    <task id="LOCAL-00001" summary="docs: Configuration_files">
+      <option name="closed" value="true" />
+      <created>1739077437730</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739077437730</updated>
+    </task>
+    <task id="LOCAL-00002" summary="docs: File structure">
+      <option name="closed" value="true" />
+      <created>1739077650531</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1739077650531</updated>
+    </task>
+    <task id="LOCAL-00003" summary="docs: File structure update">
+      <option name="closed" value="true" />
+      <created>1739077775645</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1739077775645</updated>
+    </task>
+    <task id="LOCAL-00004" summary="docs: Project Components">
+      <option name="closed" value="true" />
+      <created>1739078702103</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1739078702103</updated>
+    </task>
+    <task id="LOCAL-00005" summary="docs: Project Components">
+      <option name="closed" value="true" />
+      <created>1739078806823</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1739078806823</updated>
+    </task>
+    <task id="LOCAL-00006" summary="docs: Project structure update">
+      <option name="closed" value="true" />
+      <created>1739078948815</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1739078948816</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="docs: Configuration_files" />
+    <MESSAGE value="docs: File structure" />
+    <MESSAGE value="docs: File structure update" />
+    <MESSAGE value="docs: Project Components" />
+    <MESSAGE value="docs: Project structure update" />
+    <option name="LAST_COMMIT_MESSAGE" value="docs: Project structure update" />
+  </component>
+</project>
