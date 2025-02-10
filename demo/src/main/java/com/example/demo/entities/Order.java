@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import jakarta.validation.constraints.NotNull;
+
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -11,10 +11,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
     private String orderNum;
 
-    @Enumerated(EnumType.STRING)
+
     private OrderStatus status;
 
     @ManyToOne
@@ -32,39 +31,30 @@ public class Order {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public String getOrderNum() {
         return orderNum;
     }
-
     public void setOrderNum(String orderNum) {
         this.orderNum = orderNum;
     }
-
     public OrderStatus getStatus() {
         return status;
     }
-
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
-
     public Customer getCustomer() {
         return customer;
     }
-
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-
     public List<Product> getProducts() {
         return products;
     }
-
     public void setProducts(List<Product> products) {
         this.products = products;
     }
