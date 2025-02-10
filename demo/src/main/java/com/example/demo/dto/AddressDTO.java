@@ -1,22 +1,28 @@
 package com.example.demo.dto;
 
 import com.example.demo.entity.Customer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jdk.jfr.DataAmount;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 public class AddressDTO {
-    private Long id;
+    private UUID id;
+    @NotBlank
     private String street;
+    @NotBlank
     private String city;
-    private Long customerId;
-    private Customer customer;
+    @JsonIgnore
+    private CustomerDTO customer;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -36,11 +42,11 @@ public class AddressDTO {
         this.city = city;
     }
 
-    public Long getCustomerId() {
-        return customerId;
+    public CustomerDTO getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
+    public void setCustomer(CustomerDTO customer) {
+        this.customer = customer;
     }
 }

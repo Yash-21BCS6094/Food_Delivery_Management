@@ -1,15 +1,17 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "products")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    private UUID id;
 
     @NotBlank
     private String name;
@@ -17,12 +19,13 @@ public class Product {
     private Double price;
 
     @ManyToMany(mappedBy = "products")
+    @JsonIgnore
     private List<Order> orders;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
     public String getName() {

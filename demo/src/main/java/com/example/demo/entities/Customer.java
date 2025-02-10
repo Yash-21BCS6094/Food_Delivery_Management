@@ -1,23 +1,30 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "customers")
 public class Customer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    private UUID id;
 
-    private String firstName;
+    @Column(name = "firstname")
+    private String firstname;
 
-    private String lastName;
+    @Column(name = "lastname")
+    private String lastname;
 
     @Email
-    @NotBlank
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -27,23 +34,23 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Order> orders;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
     public String getLastName() {
-        return lastName;
+        return lastname;
     }
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastname = lastName;
     }
     public String getFirstName() {
-        return firstName;
+        return firstname;
     }
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstname = firstName;
     }
     public String getEmail() {
         return email;

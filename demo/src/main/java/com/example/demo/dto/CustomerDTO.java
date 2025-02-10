@@ -2,49 +2,48 @@ package com.example.demo.dto;
 
 import com.example.demo.entity.Address;
 import com.example.demo.entity.Order;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 public class CustomerDTO {
 
-    private Long id;
-    private String firstName;
-    private String lastName;
+    private UUID id;
+    @NotBlank
+    private String firstname;
+    @NotBlank
+    private String lastname;
+    @NotBlank
     private String email;
-    private Address address;
-    private List<Order> orders;
+    private AddressDTO address;
+    private List<OrderDTO> orders;
 
-
-    CustomerDTO(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
-
-    public String getLastName() {
-        return lastName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -55,11 +54,19 @@ public class CustomerDTO {
         this.email = email;
     }
 
-    public Address getAddress() {
+    public AddressDTO getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(AddressDTO address) {
         this.address = address;
+    }
+
+    public List<OrderDTO> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrderDTO> orders) {
+        this.orders = orders;
     }
 }

@@ -1,25 +1,32 @@
 package com.example.demo.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.*;
+
+import java.util.UUID;
 
 @Entity
 @Table(name = "addresses")
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private UUID id;
 
+    @Column(name = "street")
     private String street;
 
+    @Column(name = "city")
     private String city;
 
     @OneToOne(mappedBy = "address")
+    @JsonIgnore
     private Customer customer;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
     public String getStreet() {

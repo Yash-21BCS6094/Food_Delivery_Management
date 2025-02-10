@@ -3,23 +3,22 @@ package com.example.demo.dto;
 import com.example.demo.entity.Order;
 import jakarta.validation.constraints.NotBlank;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import java.util.List;
+import java.util.UUID;
 
 public class ProductDTO {
-    private Long id;
+    private UUID id;
+    @NotBlank
     private String name;
+    @NotBlank
     private Double price;
-    private List<Order> orders;
+    private List<OrderDTO> orders;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -39,11 +38,12 @@ public class ProductDTO {
         this.price = price;
     }
 
-    public List<Order> getOrders() {
+    public List<OrderDTO> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(List<OrderDTO> orders) {
         this.orders = orders;
     }
+
 }

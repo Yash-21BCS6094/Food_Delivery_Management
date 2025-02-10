@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class CustomerServiceImplementation implements CustomerServices {
@@ -32,18 +33,12 @@ public class CustomerServiceImplementation implements CustomerServices {
     @Override
     public CustomerDTO createCustomer(CustomerDTO customerDTO) {
         Customer customer = modelMapper.map(customerDTO, Customer.class);
-        if (customerDTO.getAddress().getId() != null) {
-            Address address = addressRepository.findById(customerDTO.getAddress().getId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Address not found"));
-            customer.setAddress(address);
-        }
         Customer savedCustomer = customerRepository.save(customer);
-
         return modelMapper.map(savedCustomer, CustomerDTO.class);
     }
 
     @Override
-    public CustomerDTO getCustomerById(Long customerId) {
+    public CustomerDTO getCustomerById(UUID customerId) {
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
 
@@ -57,21 +52,22 @@ public class CustomerServiceImplementation implements CustomerServices {
     }
 
     @Override
-    public CustomerDTO updateCustomer(Long customerId, CustomerDTO updatedCustomer) {
+    public CustomerDTO updateCustomer(UUID customerId, CustomerDTO updatedCustomer) {
         Customer customer = customerRepository.findById(customerId).orElseThrow(
                 () -> new ResourceNotFoundException("Cannot find customer")
         );
-        customer.setAddress(updatedCustomer.getAddress());
-        customer.setFirstName(updatedCustomer.getFirstName());
-        customer.setLastName(updatedCustomer.getLastName());
-        customer.setEmail(updatedCustomer.getEmail());
+        Customer updatedCustomerEntity = modelMapper.map(updatedCustomer, Customer.class);
+        customer.setAddress(updatedCustomerEntity.getAddress());
+        customer.setFirstName(updatedCustomerEntity.getFirstName());
+        customer.setLastName(updatedCustomerEntity.getLastName());
+        customer.setEmail(updatedCustomerEntity.getEmail());
 
         Customer savedCustomer = customerRepository.save(customer);
         return modelMapper.map(savedCustomer, CustomerDTO.class);
     }
 
     @Override
-    public void deleteCustomer(Long customerId) {
+    public void deleteCustomer(UUID customerId) {
         Customer customer = customerRepository.findById(customerId).
                 orElseThrow(() -> new ResourceNotFoundException("Cannot find customer"));
         customerRepository.delete(customer);
@@ -79,21 +75,20 @@ public class CustomerServiceImplementation implements CustomerServices {
 
     @Override
     public CustomerDTO getCustomerByEmail(String email) {
-        Customer customer = customerRepository.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("Customer not found"));
+        Customer customer = customerRepository.findByEmail(email);
 
         return modelMapper.map(customer, CustomerDTO.class);
     }
 
     @Override
     public List<CustomerDTO> searchCustomersByName(String name) {
-        List<Customer> customers = customerRepository.findByFirstNameContainingOrLastNameContaining(name, name);
+        List<Customer> customers = customerRepository.findByFirstnameContainingIgnoreCase(name);
         List<CustomerDTO> customerDTOS = (List<CustomerDTO>) customers.stream().map((customer) -> modelMapper.map(customer, CustomerDTO.class));
         return customerDTOS;
     }
 
     @Override
-    public List<OrderDTO> getAllOrder(Long customerId) {
+    public List<OrderDTO> getAllOrder(UUID customerId) {
         Customer customer = customerRepository.findById(customerId).orElseThrow(
                 () -> new ResourceNotFoundException("Cannot find customer")
         );

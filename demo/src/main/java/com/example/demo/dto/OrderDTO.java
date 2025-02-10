@@ -2,33 +2,36 @@ package com.example.demo.dto;
 
 import com.example.demo.entity.Customer;
 import com.example.demo.entity.OrderStatus;
-import com.example.demo.entity.Product;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 public class OrderDTO {
-    private Long id;
-    private String orderNum;
+    private UUID id;
+    @NotBlank
+    private String ordernum;
+    @NotBlank
     private OrderStatus status;
     private Customer customer;
+    @NotNull
     private List<ProductDTO> products;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
-    public String getOrderNum() {
-        return orderNum;
+    public String getOrdernum() {
+        return ordernum;
     }
 
-    public void setOrderNum(String orderNum) {
-        this.orderNum = orderNum;
+    public void setOrdernum(String ordernum) {
+        this.ordernum = ordernum;
     }
 
     public OrderStatus getStatus() {

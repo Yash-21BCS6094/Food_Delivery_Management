@@ -6,11 +6,13 @@ import com.example.demo.entity.Product;
 import com.example.demo.services.OrderServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/orders")
@@ -25,24 +27,26 @@ public class OrderController {
     }
 
     @PutMapping("/{orderId}")
-    public ResponseEntity<OrderDTO> updateOrder(@PathVariable Long orderId,
+    public ResponseEntity<OrderDTO> updateOrder(@PathVariable UUID orderId,
                                                 @RequestBody OrderDTO orderDTO) {
         return ResponseEntity.ok(orderServices.updateOrder(orderId, orderDTO));
     }
 
     @GetMapping("/{orderId}")
-    public ResponseEntity<OrderDTO> getOrderById(@PathVariable Long orderId) {
+    public ResponseEntity<OrderDTO> getOrderById(@PathVariable UUID orderId) {
         return ResponseEntity.ok(orderServices.getOrderById(orderId));
     }
 
     @DeleteMapping("/{orderId}")
-    public ResponseEntity<Void> deleteOrder(@PathVariable Long orderId) {
+    public ResponseEntity<Void> deleteOrder(@PathVariable UUID orderId) {
         orderServices.deleteOrder(orderId);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping
-    public ResponseEntity<Page<OrderDTO>> getAllOrders(Pageable pageable) {
+    public ResponseEntity<Page<OrderDTO>> getAllOrders(@RequestParam("page") int page,
+                                                       @RequestParam("size") int size) {
+        Pageable pageable = PageRequest.of(page, size);
         return ResponseEntity.ok(orderServices.getAllOrder(pageable));
     }
 
@@ -52,41 +56,41 @@ public class OrderController {
     }
 
     @GetMapping("/customer/{customerId}")
-    public ResponseEntity<List<OrderDTO>> getOrdersByCustomerId(@PathVariable Long customerId) {
+    public ResponseEntity<List<OrderDTO>> getOrdersByCustomerId(@PathVariable UUID customerId) {
         return ResponseEntity.ok(orderServices.getOrderByCustomerId(customerId));
     }
 
 
     @PatchMapping("/{orderId}/status")
-    public ResponseEntity<OrderDTO> updateOrderStatus(@PathVariable Long orderId,
+    public ResponseEntity<OrderDTO> updateOrderStatus(@PathVariable UUID orderId,
                                                       @RequestParam OrderStatus status) {
         return ResponseEntity.ok(orderServices.updateOrderStatus(orderId, status));
     }
 
 
     @PatchMapping("/{orderId}/cancel")
-    public ResponseEntity<Void> cancelOrder(@PathVariable Long orderId) {
+    public ResponseEntity<Void> cancelOrder(@PathVariable UUID orderId) {
         orderServices.cancelOrder(orderId);
         return ResponseEntity.noContent().build();
     }
 
 
     @PostMapping("/{orderId}/products")
-    public ResponseEntity<OrderDTO> addProductsToOrder(@PathVariable Long orderId,
+    public ResponseEntity<OrderDTO> addProductsToOrder(@PathVariable UUID orderId,
                                                        @RequestBody List<Product> products) {
         return ResponseEntity.ok(orderServices.addProductsToOrder(orderId, products));
     }
 
 
     @DeleteMapping("/{orderId}/products")
-    public ResponseEntity<OrderDTO> removeProductsFromOrder(@PathVariable Long orderId,
-                                                            @RequestBody List<Long> productIds) {
+    public ResponseEntity<OrderDTO> removeProductsFromOrder(@PathVariable UUID orderId,
+                                                            @RequestBody List<UUID> productIds) {
         return ResponseEntity.ok(orderServices.deleteProductsFormOrder(orderId, productIds));
     }
 
 
     @GetMapping("/{orderId}/products")
-    public ResponseEntity<List<Product>> getProductsByOrderId(@PathVariable Long orderId) {
+    public ResponseEntity<List<Product>> getProductsByOrderId(@PathVariable UUID orderId) {
         return ResponseEntity.ok(orderServices.getProductsByOrderId(orderId));
     }
 }

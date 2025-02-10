@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,7 +40,7 @@ public class ProductServiceImplementation implements ProductServices {
     }
 
     @Override
-    public ProductDTO updateProduct(Long productId, ProductDTO productDTO) {
+    public ProductDTO updateProduct(UUID productId, ProductDTO productDTO) {
         Product existingProduct = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
@@ -55,7 +56,7 @@ public class ProductServiceImplementation implements ProductServices {
 
 
     @Override
-    public ProductDTO getProductById(Long productId) {
+    public ProductDTO getProductById(UUID productId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
@@ -84,10 +85,8 @@ public class ProductServiceImplementation implements ProductServices {
 
     @Override
     public List<ProductDTO> getProductByPriceRange(Double minPrice, Double maxPrice) {
-        // Step 1: Fetch products within the price range
         List<Product> products = productRepository.findByPriceBetween(minPrice, maxPrice);
 
-        // Step 2: Convert List<Product> to List<ProductDTO> using stream()
         return products.stream()
                 .map(product -> modelMapper.map(product, ProductDTO.class))
                 .collect(Collectors.toList());
@@ -95,7 +94,7 @@ public class ProductServiceImplementation implements ProductServices {
 
 
     @Override
-    public void deleteProduct(Long productId) {
+    public void deleteProduct(UUID productId) {
         Product product = productRepository.findById(productId).orElseThrow(
                 () -> new ResourceNotFoundException("Cannot find product")
         );

@@ -40,16 +40,17 @@ public class OrderServiceImplementation implements OrderServices{
 
         // Create Order Object
         Order order = new Order();
-        order.setOrderNum(UUID.randomUUID().toString()); // Generate unique order number
+        order.setOrdernum(UUID.randomUUID().toString()); // Generate unique order number
         order.setStatus(OrderStatus.INITIATED); // Default status
         order.setCustomer(customer);
 
-        // Add Products to Order (if provided)
+        // Add Products to Order (if provided) //objects
         if (orderDTO.getProducts() != null && !orderDTO.getProducts().isEmpty()) {
             List<Product> products = productRepository.findAllById(
                     orderDTO.getProducts().stream()
                             .map(ProductDTO::getId)  // Assuming orderDTO contains a list of ProductDTO
-                            .collect(Collectors.toList())
+                            .toList()
+                    //.collect(Collectors.toList())
             );
             if (products.size() != orderDTO.getProducts().size()) {
                 throw new IllegalArgumentException("Some products not found");
@@ -66,7 +67,7 @@ public class OrderServiceImplementation implements OrderServices{
 
 
     @Override
-    public OrderDTO getOrderById(Long orderId) {
+    public OrderDTO getOrderById(UUID orderId) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
 
@@ -75,7 +76,7 @@ public class OrderServiceImplementation implements OrderServices{
 
 
     @Override
-    public OrderDTO updateOrder(Long orderId, OrderDTO orderDTO) {
+    public OrderDTO updateOrder(UUID orderId, OrderDTO orderDTO) {
         Order existingOrder = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found with ID: " + orderDTO.getId()));
 
@@ -100,7 +101,7 @@ public class OrderServiceImplementation implements OrderServices{
     }
 
     @Override
-    public OrderDTO updateOrderStatus(Long orderId, OrderStatus status) {
+    public OrderDTO updateOrderStatus(UUID orderId, OrderStatus status) {
         Order order = orderRepository.findById(orderId).orElseThrow(
                 () -> new ResourceNotFoundException("Cannot find order")
         );
@@ -109,7 +110,7 @@ public class OrderServiceImplementation implements OrderServices{
     }
 
     @Override
-    public OrderDTO addProductsToOrder(Long orderId, List<Product> products) {
+    public OrderDTO addProductsToOrder(UUID orderId, List<Product> products) {
         Order order = orderRepository.findById(orderId).orElseThrow(
                 () -> new ResourceNotFoundException("Cannot find order")
         );
@@ -121,7 +122,7 @@ public class OrderServiceImplementation implements OrderServices{
     }
 
     @Override
-    public OrderDTO deleteProductsFormOrder(Long orderId, List<Long> productIds) {
+    public OrderDTO deleteProductsFormOrder(UUID orderId, List<UUID> productIds) {
         Order order = orderRepository.findById(orderId).orElseThrow(
                 () -> new ResourceNotFoundException("Cannot find order")
         );
@@ -153,7 +154,7 @@ public class OrderServiceImplementation implements OrderServices{
     }
 
     @Override
-    public List<OrderDTO> getOrderByCustomerId(Long customerId) {
+    public List<OrderDTO> getOrderByCustomerId(UUID customerId) {
         Customer customer = customerRepository.findById(customerId).orElseThrow(
                 () -> new ResourceNotFoundException("Cannot find customer")
         );
@@ -165,7 +166,7 @@ public class OrderServiceImplementation implements OrderServices{
     }
 
     @Override
-    public List<Product> getProductsByOrderId(Long orderId) {
+    public List<Product> getProductsByOrderId(UUID orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(
                 () -> new ResourceNotFoundException("Cannot find order")
         );
@@ -173,7 +174,7 @@ public class OrderServiceImplementation implements OrderServices{
     }
 
     @Override
-    public void deleteOrder(Long orderId) {
+    public void deleteOrder(UUID orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(
                 () -> new ResourceNotFoundException("Cannot find order")
         );
@@ -181,7 +182,7 @@ public class OrderServiceImplementation implements OrderServices{
     }
 
     @Override
-    public void cancelOrder(Long orderId) {
+    public void cancelOrder(UUID orderId) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Cannot find order with ID: " + orderId));
 

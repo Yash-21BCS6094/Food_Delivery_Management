@@ -11,7 +11,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.UUID;
+
 
 @Service
 public class AddressServiceImplementation implements AddressServices {
@@ -26,31 +27,20 @@ public class AddressServiceImplementation implements AddressServices {
 
     @Override
     public AddressDTO createAddress(AddressDTO addressDTO) {
-        Customer customer = customerRepository.findById(addressDTO.getCustomerId()).orElseThrow(
-                () -> new ResourceNotFoundException("Customer not found")
-        );
         Address address = modelMapper.map(addressDTO, Address.class);
-        address.setCustomer(customer);
-
         Address savedAddress = addressRepository.save(address);
         return modelMapper.map(savedAddress, AddressDTO.class);
     }
 
     @Override
-    public AddressDTO updateAddress(Long addressId, AddressDTO addressDTO) {
-        Customer customer = customerRepository.findById(addressDTO.getCustomerId()).orElseThrow(
-                () -> new ResourceNotFoundException("Customer not found")
-        );
-
+    public AddressDTO updateAddress(UUID addressId, AddressDTO addressDTO) {
         Address address = modelMapper.map(addressDTO, Address.class);
-        address.setCustomer(customer);
-
         Address savedAddress = addressRepository.save(address);
         return modelMapper.map(savedAddress, AddressDTO.class);
     }
 
     @Override
-    public AddressDTO getAddressById(Long addressId) {
+    public AddressDTO getAddressById(UUID addressId) {
         Address savedAddress = addressRepository.findById(addressId).orElseThrow(
                 () -> new ResourceNotFoundException("Address not found")
         );
@@ -58,11 +48,10 @@ public class AddressServiceImplementation implements AddressServices {
     }
 
     @Override
-    public void deleteAddress(Long addressId) {
+    public void deleteAddress(UUID addressId) {
         if(!addressRepository.existsById(addressId)){
             throw new ResourceNotFoundException("Address not found");
         }
         addressRepository.deleteById(addressId);
     }
 }
-// files u
